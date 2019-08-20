@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS franquias_cadastro (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  numero TINYINT UNSIGNED NOT NULL,
+  titulo VARCHAR(65) NOT NULL
+) ENGINE = InnoDB;
+INSERT INTO franquias_cadastro (
+    numero, titulo
+)
+VALUES 
+(8,	"CAXIAS DO SUL"),
+(13,"	CRICIUMA"),
+(3,	"ESTREITO"),
+(4,	"CENTRO-FPOLIS"),
+(9,	"INGLESES"),
+(1,	"ITACORUBI"),
+(2,	"KOBRASOL"),
+(5,	"PALHOÇA"),
+(10,"	RECIFE"),
+(6,	"SÃO PAULO-OSASCO"),
+(12,"	SÃO PAULO-PIRACICABA");
