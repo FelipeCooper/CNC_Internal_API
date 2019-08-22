@@ -2,9 +2,9 @@
   "name": "CNC_Interno",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon"
   },
   "keywords": [],
   "author": "",

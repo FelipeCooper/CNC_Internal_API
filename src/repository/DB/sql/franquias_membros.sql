@@ -10,8 +10,8 @@ INSERT INTO franquias_membros (
 )
 VALUES 
 
-(8	,"CRISTIANE SALVADOR","cristiane.salvador@grupoembracon.com.br        "),
-(8	,"PAULO RICARDO VALIM VIEIRA","paulo.vieira@grupoembracon.com.br      "),
+(8	,"CRISTIANE SALVADOR","cristiane.salvador@grupoembracon.com.br"),
+(8	,"PAULO RICARDO VALIM VIEIRA","paulo.vieira@grupoembracon.com.br"),
 (8	,"RAPHAEL TED	","raphael.tedd@grupoembracon.com.br"),
 (13,"	GABRIEL DIETRICH","gabriel.dietrich@grupoembracon.com.br"),
 (3	,"PAULO ISRAEL PAS NUNES","estreito3@grupoembracon.com.br"),

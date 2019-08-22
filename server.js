@@ -11,8 +11,7 @@ app.use(express.static(__dirname + '/src/views/style'));
 
 //
 
-app.get('/', async (req,res)=>{
-    res.send('olá mundo');
-})
+app.use('/api',require('./src/controller/routes'));
 
-app.listen('8080');
+
+app.listen('3001');
