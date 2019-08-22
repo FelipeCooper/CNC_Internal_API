@@ -1,4 +1,4 @@
-const queries = require('./queries/SetorQueries');
+const queries = require('./DB/queries/SetorQueries');
 const dbConnection = require('./DB/config/Connection');
 
 const SetoresRepository = {

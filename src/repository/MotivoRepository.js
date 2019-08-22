@@ -1,34 +1,15 @@
-const queries = require('./DB/queries/FranquiaQueries');
+const queries = require('./DB/queries/MotivoQueries');
 const dbConnection = require('./DB/config/Connection');
 
-const FranquiaRepository = {
-    async save(franquia) {
+const MotivoRepository = {
+    async save(motivo) {
         let con = await dbConnection();
         try {
             await con.query('START TRANSACTION');
-            let result = await con.query(queries.insert_franquias_cadastro, [franquia.values()]);
-            await con.query("COMMIT");
-            franquia.id = result.insertId;
-            return franquia;
-        }
-        catch (ex) {
-            await con.query(`ROLLBACK`);
-            console.log(ex);
-            throw ex;
-        }
-        finally {
-            await con.destroy();
-            await con.release();
-        }
-    },
-    //-------//
-    async read() {
-        let con = await dbConnection();
-        try {
-            await con.query("START TRANSACTION");
-            let result = await con.query(queries.read_franquias_cadastro);
+            let savedMotivo = await con.query(queries.insert_nc_motivos, [motivo.titulo]);
             await con.query('COMMIT');
-            return result;
+            motivo.id = savedMotivo.insertId;
+            return motivo;
         }
         catch (ex) {
             await con.query('ROLLBACK');
@@ -40,14 +21,14 @@ const FranquiaRepository = {
             await con.release();
         }
     },
-    //-----//
+    //------//
     async readId(id) {
         let con = await dbConnection();
         try {
-            await con.query('START TRANSACTION');
-            let result = await con.query(queries.readID_franquias_cadastro, [id]);
+            await con.query("START TRANSACTION");
+            let motivos = await con.query(queries.readID_nc_motivos, [id]);
             await con.query('COMMIT');
-            return result;
+            return motivos;
         }
         catch (ex) {
             await con.query('ROLLBACK');
@@ -59,39 +40,58 @@ const FranquiaRepository = {
             await con.release();
         }
     },
-    //-----------//
-    async update(franquia) {
+    //------//
+    async update(motivo) {
         let con = await dbConnection();
         try {
             await con.query('START TRANSACTION');
-            let result = await con.queries(queries.update_franquias_cadastro, [
-                franquia.values(),
-                franquia.id
-            ])
+            let updatedmotivo = await con.query(queries.update_nc_motivos, [
+                motivo.titulo,
+                motivo.id
+            ]);
             await con.query('COMMIT');
-            return result;
+            return updatedmotivo;
         }
         catch (ex) {
             await con.query('ROLLBACK');
             console.log(ex);
             throw ex;
         }
-        finally{
+        finally {
             await con.destroy();
             await con.release();
         }
     },
-    //-------//
-    async delete(id){
+    //--------///
+    async delete(id) {
         let con = await dbConnection();
-        try{
+        try {
             await con.query('START TRANSACTION');
-            await con.query(queries.delete_franquias_cadastro,[id]);
-            await con.query(`COMMIT`);
+            await con.query(queries.delete_nc_motivos, [id]);
+            await con.query('COMMIT')
             return true;
         }
-        catch (ex){
+        catch (ex) {
             await con.query('ROLLBACK');
+            console.log(ex);
+            throw ex;
+        }
+        finally {
+            await con.destroy();
+            await con.release();
+        }
+    },
+    //------//
+    async read(){
+        let con = await dbConnection();
+        try {
+            await con.query("START TRANSACTION");
+            let result = await con.queries(queries.read_nc_motivos);
+            await con.query('commit');
+            return result;
+        }
+        catch(ex){
+            con.query('ROLLBACK');
             console.log(ex);
             throw ex;
         }
@@ -102,6 +102,4 @@ const FranquiaRepository = {
     }
 }
 
-
-
-module.exports = FranquiaRepository;
+module.exports = MotivoRepository;

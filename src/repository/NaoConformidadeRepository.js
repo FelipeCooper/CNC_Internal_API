@@ -1,4 +1,4 @@
-const queries = require('../repository/queries/NaoConformidadeQueries');
+const queries = require('./DB/queries/NaoConformidadeQueries');
 const dbConnection = require('./DB/config/Connection');
 
 

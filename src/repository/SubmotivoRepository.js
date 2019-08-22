@@ -1,34 +1,15 @@
-const queries = require('./DB/queries/FranquiaQueries');
+const queries = require('./DB/queries/SubmotivoQueries');
 const dbConnection = require('./DB/config/Connection');
 
-const FranquiaRepository = {
-    async save(franquia) {
+const SubmotivoRepository = {
+    async save(Submotivo) {
         let con = await dbConnection();
         try {
             await con.query('START TRANSACTION');
-            let result = await con.query(queries.insert_franquias_cadastro, [franquia.values()]);
-            await con.query("COMMIT");
-            franquia.id = result.insertId;
-            return franquia;
-        }
-        catch (ex) {
-            await con.query(`ROLLBACK`);
-            console.log(ex);
-            throw ex;
-        }
-        finally {
-            await con.destroy();
-            await con.release();
-        }
-    },
-    //-------//
-    async read() {
-        let con = await dbConnection();
-        try {
-            await con.query("START TRANSACTION");
-            let result = await con.query(queries.read_franquias_cadastro);
+            let savedSubmotivo = await con.query(queries.insert_nc_submotivos, [Submotivo.titulo]);
             await con.query('COMMIT');
-            return result;
+            Submotivo.id = savedSubmotivo.insertId;
+            return Submotivo;
         }
         catch (ex) {
             await con.query('ROLLBACK');
@@ -40,14 +21,14 @@ const FranquiaRepository = {
             await con.release();
         }
     },
-    //-----//
+    //------//
     async readId(id) {
         let con = await dbConnection();
         try {
-            await con.query('START TRANSACTION');
-            let result = await con.query(queries.readID_franquias_cadastro, [id]);
+            await con.query("START TRANSACTION");
+            let submotivos = await con.query(queries.readID_nc_submotivos, [id]);
             await con.query('COMMIT');
-            return result;
+            return submotivos;
         }
         catch (ex) {
             await con.query('ROLLBACK');
@@ -59,39 +40,58 @@ const FranquiaRepository = {
             await con.release();
         }
     },
-    //-----------//
-    async update(franquia) {
+    //------//
+    async update(Submotivo) {
         let con = await dbConnection();
         try {
             await con.query('START TRANSACTION');
-            let result = await con.queries(queries.update_franquias_cadastro, [
-                franquia.values(),
-                franquia.id
-            ])
+            let updatedSubmotivo = await con.query(queries.update_nc_submotivos, [
+                Submotivo.titulo,
+                Submotivo.id
+            ]);
             await con.query('COMMIT');
-            return result;
+            return updatedSubmotivo;
         }
         catch (ex) {
             await con.query('ROLLBACK');
             console.log(ex);
             throw ex;
         }
-        finally{
+        finally {
             await con.destroy();
             await con.release();
         }
     },
-    //-------//
-    async delete(id){
+    //--------///
+    async delete(id) {
         let con = await dbConnection();
-        try{
+        try {
             await con.query('START TRANSACTION');
-            await con.query(queries.delete_franquias_cadastro,[id]);
-            await con.query(`COMMIT`);
+            await con.query(queries.delete_nc_submotivos, [id]);
+            await con.query('COMMIT')
             return true;
         }
-        catch (ex){
+        catch (ex) {
             await con.query('ROLLBACK');
+            console.log(ex);
+            throw ex;
+        }
+        finally {
+            await con.destroy();
+            await con.release();
+        }
+    },
+    //------//
+    async read(){
+        let con = await dbConnection();
+        try {
+            await con.query("START TRANSACTION");
+            let result = await con.queries(queries.read_nc_submotivos);
+            await con.query('commit');
+            return result;
+        }
+        catch(ex){
+            con.query('ROLLBACK');
             console.log(ex);
             throw ex;
         }
@@ -102,6 +102,4 @@ const FranquiaRepository = {
     }
 }
 
-
-
-module.exports = FranquiaRepository;
+module.exports = SubmotivoRepository;
