@@ -102,3 +102,7 @@ const FranquiaRepository = {
         }
     }
 }
+
+
+
+module.exports = FranquiaRepository;
