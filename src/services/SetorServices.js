@@ -9,7 +9,7 @@ const SetorServices = {
     },
     async readID(id){
         let result = await SetorRepository.readId(id);
-        return result;
+        return result[0];
     },
     async save(titulo){
         let savedSetor = new Setor(titulo);

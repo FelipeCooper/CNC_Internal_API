@@ -15,6 +15,11 @@ const FranquiaServices = {
     },
     async readId(id){
         let result = await FranquiaRepository.readId(id);
+        if (typeof result[0] !== 'undefined'){
+            result = result[0]
+        }else{
+            result = new Franquia(null,null,null);
+        }
         return result;
     },
     async update(numero,titulo,id){
