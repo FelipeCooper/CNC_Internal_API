@@ -2,23 +2,28 @@ const express = require('express');
 const routes = express.Router();
 const NaoConformidadesServices = require('../services/NaoConformidadeServices');
 const SetoresServices = require('../services/SetorServices');
-
+const NaoConformidades = require('../entities/NaoConformidade')
 
 routes.get('/mostrar', async (req, res) => {
-    let naoConformidades = await NaoConformidadesServices.read();
-    var result = Object.keys(naoConformidades).map(function (key) {
-        return naoConformidades[key];
+    let result = await NaoConformidadesServices.read();
+
+    let cnc = Object.keys(result).map(function (key) {
+        return result[key];
     });
-    let setores = result.map(async (cnc) => {
-        return await getSetor(cnc.setor_id);
+    let todasNaoConformidades = cnc.map(async (naoConformidade) => {
+        let setor = await getSetor(naoConformidade.setor_id);
+        let resultado = new NaoConformidades(setor[0].titulo)
+        return (resultado)
     });
-    Promise.all(setores).then( resultado =>{
+    Promise.all(todasNaoConformidades).then(resultado => {
         console.log(resultado)
-        res.json(resultado);
-    }
-    );
+        res.json(result);
+    });
 
 })
+
+
+
 
 module.exports = routes;
 

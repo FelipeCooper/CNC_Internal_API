@@ -1,10 +1,10 @@
 const queries = require('../repository/queries/NaoConformidadeQueries');
-const dbConection = require('./DB/config/Conection');
+const dbConnection = require('./DB/config/Connection');
 
 
 module.exports = {
     async save(NaoConformidade) {
-        let con = await dbConection();
+        let con = await dbConnection();
         try {
             await con.query('START TRANSACTION');
             let savedCNC = await con.query(queries.insert_nc_cadastro, [
@@ -26,7 +26,7 @@ module.exports = {
     },
     //---//
     async read(){
-        let con = await dbConection();
+        let con = await dbConnection();
         try{
             await con.query("START TRANSACTION");
             let NaoConformidades = await con.query(queries.read_nc_cadastro);
