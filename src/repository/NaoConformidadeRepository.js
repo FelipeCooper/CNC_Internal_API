@@ -42,5 +42,24 @@ module.exports = {
             await con.destroy();
             await con.release();
         }
-    }
+    },
+    //------//
+    async readBySetor(setorId){
+        let con = await dbConnection();
+        try{
+            await con.query("START TRANSACTION");
+            let NaoConformidades = await con.query(queries.readBySetor_nc_cadastro,[setorId]);
+            await con.query("COMMIT");
+            return NaoConformidades;
+        }
+        catch(ex){
+            await con.query("ROLLBACK");
+            console.log(ex);
+            throw ex;
+        }
+        finally{
+            await con.destroy();
+            await con.release();
+        }
+    }  
 }

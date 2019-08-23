@@ -11,6 +11,10 @@ const NaoConformidadeServices = {
     async read(){
         let result = await NaoConformidadesRepository.read();
         return(result);
+    },
+    async readBySetor(setorId){
+        let result = await NaoConformidadesRepository.readBySetor(setorId);
+        return(result);
     }
 }
 

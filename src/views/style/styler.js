@@ -1,34 +1,28 @@
+var xhr = new XMLHttpRequest();
 let selectMotivo = document.querySelector('#selectMotivo');
 let selectSetor = document.querySelector('#selectSetor');
 let selectSubmotivo = document.querySelector('#selectSubmotivo');
 //-----//
 selectSetor.addEventListener('change', async event => {
-    let request = await requisicao('motivos',{setor_id : selectSetor.value});
-    let result =await request.json();
+    limparSelect([selectMotivo,selectSubmotivo])
+    let result = await requisicaoPost('motivos',{setor_id : selectSetor.value});
     addOption(selectMotivo,result);
 })
-
+//
 selectMotivo.addEventListener('change', async event =>{
-    let request = await requisicao('submotivos',{motivo_id : selectMotivo.value})
-    console.log(request)
-    let result = await request.json();
+    limparSelect([selectSubmotivo])
+    let result = await requisicaoPost('submotivos',{motivo_id : selectMotivo.value});
     addOption(selectSubmotivo,result);
 })
-
-
-
-
 //FUNÇOES AUXILIARES
 function addOption(select,result) {
-    select.innerHTML = '';
     result.forEach(element => {
-        var option = new Option(element.titulo, element.id);
+        let option = new Option(element.titulo, element.id);
         select.add(option);
     });
-
 }
-
-async function requisicao(caminho, body){
+//
+async function requisicaoPost(caminho, body){
     let request = await fetch(caminho, {
         method: 'post',
         headers: {
@@ -37,5 +31,41 @@ async function requisicao(caminho, body){
         },
         body: JSON.stringify(body)
     });
-    return request;
+    return await request.json();
 }
+//
+function limparSelect(select){
+    select.forEach(sel =>{
+        sel.innerHTML = '<option disabled selected>Selecione uma opção</option>';
+    });
+}
+//
+async function redirecionaMostrar(){
+    let usuario = 'usuario';
+    let setor = 2;
+    post('mostrar',{usuario: usuario, setor_id: setor})
+}
+//
+
+
+
+//FUNÇAO PARA ENVIAR BODY APENAS NO CLICK DE UM LINK
+function post(path, params, method='post') {
+    const form = document.createElement('form');
+    form.method = method;
+    form.action = path;
+  
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
+        const hiddenField = document.createElement('input');
+        hiddenField.type = 'hidden';
+        hiddenField.name = key;
+        hiddenField.value = params[key];
+  
+        form.appendChild(hiddenField);
+      }
+    }
+  
+    document.body.appendChild(form);
+    form.submit();
+  }

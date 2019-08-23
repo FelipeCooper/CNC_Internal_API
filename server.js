@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/src/views'));
 
 //
 
-app.use('/api',require('./src/controller/routes'));
+app.use('/',require('./src/controller/routes'));
 
 
 app.listen('3001');
