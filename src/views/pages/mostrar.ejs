@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/style/style.css" rel="stylesheet" type="text/css">
+
+    <title>CNC Grupo Embracon</title>
+</head>
+<body>
+    <ul class="menu">
+        <li title="home"><a class="menu-button home">menu</a></li>
+        <li title="Pesquisar NC"><a href="mostrar" class="search">Pesquisar NC</a></li>
+        <li title="Cadastro de Franquias"><a href="registrar" class="pencil">Cadastro de Nao Conformidade</a></li>
+       
+    </ul>
+   <div id="sectioncnc" class="sectioncnc">
+        <section>
+            <ul class="menu-bar open">
+                <li><a class="menu-button">TABELA DE NÃO CONFORMIDADES</a></li>
+            </ul>
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <th style="width: 65px">Data</th>
+                            <th style="width: 65px">Franquia</th>
+                            <th style="width: 65px">Setor</th>
+                            <th style="width: 65px">Motivo </th>
+                            <th style="width: 65px">Sub-motivo </th>
+                            <th style="width: 65px">Condominio</th>
+                            <th style="width: 65px">Responsavel</th>
+                            <th style="width: 300px">Observaçoes</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody id='cnc-tblcontent'>
+                       <% if(typeof cnc != 'undefined'){
+                        cnc.forEach(naoConformidade => {%>
+                        <tr>
+                            <td style="width: 65px" > <%= naoConformidade.data %></td>
+                            <td style="width: 65px" ><%= naoConformidade.franquia %></td>
+                            <td style="width: 65px" ><%= naoConformidade.setor %></td>
+                            <td style="width: 65px" ><%= naoConformidade.motivo %></td>
+                            <td style="width: 80px" ><%= naoConformidade.submotivo %></td>
+                            <td style="width: 65px" ><%= naoConformidade.condominio %></td>
+                            <td style="width: 65px" ><%= naoConformidade.responsavel %></td>
+                            <td style="width: 300px" ><%= naoConformidade.observacoes %></td>
+                        </tr>
+                    <%  })}  %>
+                    </tbody>
+                </table>
+            </div>
+            <input type="month" id="data" class="inputter" style="width:18%;float: right;">
+            <button onclick="download()" id="download" style="float: right; margin-top: 10px" class="btn-default">Download</button>
+        </section>
+    </div>
+
+
+
+
+</body>
+</html>

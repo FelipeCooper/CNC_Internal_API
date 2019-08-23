@@ -86,8 +86,26 @@ const MotivoRepository = {
         let con = await dbConnection();
         try {
             await con.query("START TRANSACTION");
-            let result = await con.queries(queries.read_nc_motivos);
+            let result = await con.query(queries.read_nc_motivos);
             await con.query('commit');
+            return result;
+        }
+        catch(ex){
+            con.query('ROLLBACK');
+            console.log(ex);
+            throw ex;
+        }
+        finally{
+            await con.destroy();
+            await con.release();
+        }
+    },
+    async motivoHasSetor(idMotivo){
+        let con = await dbConnection();
+        try{
+            await con.query('START TRANSACTION');
+            let result = con.query(queries.motivo_has_setor,[idMotivo]);
+            await con.query('COMMIT');
             return result;
         }
         catch(ex){

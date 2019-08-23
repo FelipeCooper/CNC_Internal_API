@@ -21,6 +21,11 @@ const MotivoServices = {
     },
     async delete(id){
         return (await MotivoRepository.delete(id));
+    },
+    async motivoHasSetor(idSetor){
+        let motivosHasSetor = await MotivoRepository.motivoHasSetor(idSetor);
+        return motivosHasSetor;
     }
+
 }
 module.exports = MotivoServices;

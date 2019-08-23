@@ -86,7 +86,7 @@ const SetoresRepository = {
         let con = await dbConnection();
         try {
             await con.query("START TRANSACTION");
-            let result = await con.queries(queries.read_nc_setores);
+            let result = await con.query(queries.read_nc_setores);
             await con.query('commit');
             return result;
         }

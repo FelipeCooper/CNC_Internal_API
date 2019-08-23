@@ -21,6 +21,10 @@ const SubmotivoServices = {
     },
     async delete(id){
         return (await SubmotivoRepository.delete(id));
+    },
+    async submotivoHasMotivo(idSetor){
+        let submotivoHasMotivo = await SubmotivoRepository.submotivoHasMotivo(idSetor);
+        return submotivoHasMotivo;
     }
 }
 module.exports = SubmotivoServices;

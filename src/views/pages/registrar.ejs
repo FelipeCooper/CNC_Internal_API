@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/style/style.css" rel="stylesheet" type="text/css">
+
+    <title>CNC Grupo Embracon</title>
+</head>
+<body>
+    <ul class="menu">
+        <li title="home"><a class="menu-button home">menu</a></li>
+        <li title="Pesquisar NC"><a href="mostrar" class="search">Pesquisar NC</a></li>
+        <li title="Cadastro de Franquias"><a href="registrar" class="pencil">Cadastro de Nao Conformidade</a></li>
+        </ul>
+   <!-- CONTAINER DE CADASTRO DE NAO CONFORMIDADE-->
+    <div class="container active" id="cnt-cadastro">
+        <ul class="menu-bar open">
+            <li><a class="menu-button">CADASTRO DE NAO CONFORMIDADE</a></li>
+        </ul>
+        <div class="box" style="text-align: center; height: 150px;">
+            <select id="selectSetor">
+            <% if(typeof setores != 'undefined'){
+                setores.forEach(setor => {
+                    %>
+                <option value=<%= setor.id %>><%= setor.titulo %> </option>
+            <%  })}  %>
+            </select>
+            <select name="motivo_id" id="selectMotivo">
+            </select>
+            <select name="submotivo_id" id="selectSubmotivo">
+            </select>
+        </div>
+    </div>
+
+
+
+
+
+
+<script type="text/javascript" src="/style/styler.js"></script>
+</body>
+</html>

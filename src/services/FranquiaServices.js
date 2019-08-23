@@ -18,7 +18,7 @@ const FranquiaServices = {
         if (typeof result[0] !== 'undefined'){
             result = result[0]
         }else{
-            result = new Franquia(null,null,null);
+            result = new Franquia(null,'SEDE',null);
         }
         return result;
     },

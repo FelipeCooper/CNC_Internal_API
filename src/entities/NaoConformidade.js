@@ -1,5 +1,5 @@
 const NaoConformidade = class NaoConformidade{
-    constructor(setor,motivo,submotivo,condominio,responsavel,setorMembro,observacoes,setorResponsavel,franquia){
+    constructor(setor,motivo,submotivo,condominio,responsavel,setorMembro,observacoes,setorResponsavel,franquia,data,id){
         this.franquia = franquia;
         this.setor = setor;
         this.motivo = motivo;
@@ -9,6 +9,8 @@ const NaoConformidade = class NaoConformidade{
         this.setorMembro = setorMembro;
         this.observacoes = observacoes;
         this.setorResponsavel = setorResponsavel;
+        this.data = data;
+        this.id = id;
     }
     //----//
 }
