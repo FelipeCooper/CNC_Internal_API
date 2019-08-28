@@ -2,11 +2,11 @@ const NaoConformidadesRepository = require('../repository/NaoConformidadeReposit
 const NaoConformidade = require('../entities/NaoConformidade');
 
 const NaoConformidadeServices = {
-    async save (setor,motivo,submotivo,condominio,responsavel,observacoes,setorResponsavel,franquia){
-        let savedNaoConformidade = new NaoConformidade(setor,motivo,submotivo,condominio,responsavel,observacoes,setorResponsavel,franquia);
+    async save (setor,motivo,submotivo,condominio,responsavel,setorMembro,observacoes,setorResponsavel,franquia){
+        let savedNaoConformidade = new NaoConformidade(setor,motivo,submotivo,condominio,responsavel,setorMembro,observacoes,setorResponsavel,franquia);
+        console.log(savedNaoConformidade)
         let result = await NaoConformidadesRepository.save(savedNaoConformidade);
-
-        res.json({resultado: result})
+        return ({resultado: result})
     },
     async read(){
         let result = await NaoConformidadesRepository.read();

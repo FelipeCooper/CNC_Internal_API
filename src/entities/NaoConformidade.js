@@ -13,6 +13,11 @@ const NaoConformidade = class NaoConformidade{
         this.id = id;
     }
     //----//
+    values(){
+        return(Array(this.setor, this.motivo, this.submotivo, this.condominio, this.setorMembro,this.responsavel,
+            this.setorResponsavel,this.franquia,this.observacoes ));
+
+    }
 }
 
 module.exports = NaoConformidade;
