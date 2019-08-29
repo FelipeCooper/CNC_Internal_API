@@ -17,4 +17,8 @@ routes.put('/atualizar', async (req, res) => {
     let result = SetorMembroServices.update(req.body.nome, req.body.email, req.body.setor_id, req.body.id);
     res.json(result);
 })
+routes.post('/verifica', async(req,res)=>{
+    let result = await SetorMembroServices.verifica(req.body.email);
+    res.json(result);
+})
 module.exports = routes;

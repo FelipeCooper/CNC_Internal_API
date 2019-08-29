@@ -19,6 +19,7 @@ app.use('/api/motivo', require('./src/controller/MotivoController'));
 app.use('/api/submotivo', require('./src/controller/SubmotivoController'));
 app.use('/api/setor', require('./src/controller/SetorController'));
 app.use('/api/setorMembro', require('./src/controller/SetorMembroController'));
+app.use('/api/Admin', require('./src/controller/AdminController'));
 
 
 

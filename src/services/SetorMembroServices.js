@@ -29,6 +29,14 @@ const SetorMembroServices = {
         }else{
             return {result: 'Não é um membro'}
         }
+    },
+    async verifica(email){
+        let result = await SetorMembroRepository.readByEmail(email);
+        if (result.length != 0){
+            return result[0];
+        }else{
+            return({resultado: 'NaoAutorizado'})
+        }
     }
 }
 module.exports = SetorMembroServices;
