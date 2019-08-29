@@ -1,17 +1,14 @@
 const express = require('express');
 const routes = express.Router();
-//---//
 const NaoConformidades = require('../entities/NaoConformidade');
-//---//
 const NaoConformidadesServices = require('../services/NaoConformidadeServices');
 const SetoresServices = require('../services/SetorServices');
 const FranquiaServices = require('../services/FranquiaServices');
 const MotivoServices = require('../services/MotivoServices');
 const SubmotivoServices = require('../services/SubmotivosServices');
-const SetorMembroServices = require('../services/SetorMembroServices')
-//- MOSTRAR//
+const SetorMembroServices = require('../services/SetorMembroServices');
 routes.post('/mostrar', async (req, res) => {
-    if (req.body.usuario === 'admin') {
+    if (typeof req.body.setor_id == undefined) {
         var result = await NaoConformidadesServices.read();
     } else {
         var result = await NaoConformidadesServices.readBySetor(req.body.setor_id);
@@ -44,38 +41,10 @@ routes.post('/mostrar', async (req, res) => {
         res.json(resultado)
     });
 })
-// BUSCAR INFORMAÇOES//
-routes.get('/setores', async (req, res) => {
-    let setores = await SetoresServices.read();
-    res.json(setores)
-})
-routes.post('/motivos', async (req, res) => {
-    let motivos = await MotivoServices.motivoHasSetor(req.body.setor_id);
-    let todosMotivos = motivos.map(async (motivo) => {
-        return await MotivoServices.readID(motivo.motivo_id)
-    })
-    Promise.all(todosMotivos).then(resultado => {
-        res.json(resultado)
-    });
-})
-routes.post('/submotivos', async (req, res) => {
-    let submotivos = await SubmotivoServices.submotivoHasMotivo(req.body.motivo_id);
-    let todosSubmotivos = submotivos.map(async (submotivo) => {
-        return await SubmotivoServices.readID(submotivo.submotivo_id)
-    })
-    Promise.all(todosSubmotivos).then(resultado => {
-        res.json(resultado)
-    });
-})
-routes.all('/franquias', async (req, res) => {
-    let result = await FranquiaServices.read();
-    res.json(result);
-})
-// Salvar informações
-routes.post('/registrarNC', async (req,res) =>{
+routes.post('/registrar', async (req,res) =>{
     let body = req.body;
     let result = await NaoConformidadesServices.save(body.setor_id, body.motivo_id, body.submotivo_id, body.condominio,
-        body.responsavel, body.responsavel_id, body.obs, body.setor_id)
+        body.responsavel, body.responsavel_id, body.obs,body.setorResponsavel,body.franquia_id)
     res.json(result)
 })
 

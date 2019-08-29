@@ -105,6 +105,25 @@ const SetorMembroRepository = {
             await con.destroy();
             await con.release();
         }
+    },
+    //-------//
+    async readByEmail(email) {
+        let con = await dbConnection();
+        try {
+            await con.query('START TRANSACTION');
+            let result = await con.query(queries.readByEmail_setor_membros, [email]);
+            await con.query('COMMIT');
+            return result;
+        }
+        catch (ex) {
+            await con.query('ROLLBACK');
+            console.log(ex)
+            throw ex;
+        }
+        finally {
+            await con.destroy();
+            await con.release();
+        }
     }
 }
 
