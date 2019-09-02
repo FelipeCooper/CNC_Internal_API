@@ -9,9 +9,9 @@ const SubmotivoServices = require('../services/SubmotivosServices');
 const SetorMembroServices = require('../services/SetorMembroServices');
 routes.post('/mostrar', async (req, res) => {
     if (typeof req.body.setor_id == undefined) {
-        var result = await NaoConformidadesServices.read();
+        var result = await NaoConformidadesServices.read(req.body.data_start, req.body.data_end);
     } else {
-        var result = await NaoConformidadesServices.readBySetor(req.body.setor_id);
+        var result = await NaoConformidadesServices.readBySetor(req.body.setor_id, req.body.data_start, req.body.data_end);
     }
     let todasNaoConformidades = result.map(async (naoConformidade) => {     //Cria Promises
         let setor = await getter(naoConformidade.setor_id, SetoresServices);
@@ -41,10 +41,10 @@ routes.post('/mostrar', async (req, res) => {
         res.json(resultado)
     });
 })
-routes.post('/registrar', async (req,res) =>{
+routes.post('/registrar', async (req, res) => {
     let body = req.body;
     let result = await NaoConformidadesServices.save(body.setor_id, body.motivo_id, body.submotivo_id, body.condominio,
-        body.responsavel, body.responsavel_id, body.obs,body.setorResponsavel,body.franquia_id)
+        body.responsavel, body.responsavel_id, body.obs, body.setorResponsavel, body.franquia_id)
     res.json(result)
 })
 

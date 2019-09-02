@@ -25,11 +25,11 @@ module.exports = {
         }
     },
     //---//
-    async read(){
+    async read(data_start,data_end){
         let con = await dbConnection();
         try{
             await con.query("START TRANSACTION");
-            let NaoConformidades = await con.query(queries.read_nc_cadastro);
+            let NaoConformidades = await con.query(queries.read_nc_cadastro,[data_start,data_end]);
             await con.query("COMMIT");
             return NaoConformidades;
         }
@@ -44,11 +44,11 @@ module.exports = {
         }
     },
     //------//
-    async readBySetor(setorId){
+    async readBySetor(setorId,data_start,data_end){
         let con = await dbConnection();
         try{
             await con.query("START TRANSACTION");
-            let NaoConformidades = await con.query(queries.readBySetor_nc_cadastro,[setorId]);
+            let NaoConformidades = await con.query(queries.readBySetor_nc_cadastro,[setorId,data_start,data_end]);
             await con.query("COMMIT");
             return NaoConformidades;
         }

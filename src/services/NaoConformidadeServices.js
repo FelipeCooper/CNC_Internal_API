@@ -8,12 +8,12 @@ const NaoConformidadeServices = {
         let result = await NaoConformidadesRepository.save(savedNaoConformidade);
         return ({resultado: result})
     },
-    async read(){
-        let result = await NaoConformidadesRepository.read();
+    async read(data_start,data_end){
+        let result = await NaoConformidadesRepository.read(data_start,data_end);
         return(result);
     },
-    async readBySetor(setorId){
-        let result = await NaoConformidadesRepository.readBySetor(setorId);
+    async readBySetor(setorId,data_start,data_end){
+        let result = await NaoConformidadesRepository.readBySetor(setorId,data_start,data_end);
         return(result);
     }
 }
