@@ -8,7 +8,7 @@ const MotivoServices = require('../services/MotivoServices');
 const SubmotivoServices = require('../services/SubmotivosServices');
 const SetorMembroServices = require('../services/SetorMembroServices');
 routes.post('/mostrar', async (req, res) => {
-    if (typeof req.body.setor_id == undefined) {
+    if (typeof req.body.setor_id == 'undefined') {
         var result = await NaoConformidadesServices.read(req.body.data_start, req.body.data_end);
     } else {
         var result = await NaoConformidadesServices.readBySetor(req.body.setor_id, req.body.data_start, req.body.data_end);

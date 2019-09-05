@@ -18,4 +18,5 @@ INSERT INTO nc_setores (id, titulo) VALUES
   (12, "IMÓVEIS"),
   (13, "RH"),
   (14, "SOCIETÁRIO"),
-  (15, "TI");
+  (15, "TI"),
+  (16, "FRANQUIA");
