@@ -5,6 +5,10 @@ const SetorMembro = class SetorMembro{
         this.setor = setor;
         this.id = id;
     }
+    values(){
+        return(Array(this.nome,this.email,this.setor));
+
+    }
 }
 
 module.exports = SetorMembro;

@@ -7,9 +7,7 @@ const SetorMembroRepository = {
         try {
             await con.query('START TRANSACTION');
             let savedSetorMembro = await con.query(queries.insert_setor_membros, [
-                SetorMembro.nome,
-                SetorMembro.email,
-                SetorMembro.setor
+                SetorMembro.values()
             ]);
             await con.query('COMMIT');
             SetorMembro.id = savedSetorMembro.insertId;
@@ -30,7 +28,7 @@ const SetorMembroRepository = {
         let con = await dbConnection();
         try {
             await con.query("START TRANSACTION");
-            let SetorMembros = await con.query(queries.readID_setor_membros, [id]);
+            let SetorMembros = await con.query(queries.readsetor_id_membros, [id]);
             await con.query('COMMIT');
             return SetorMembros;
         }
@@ -75,7 +73,7 @@ const SetorMembroRepository = {
             await con.query('START TRANSACTION');
             await con.query(queries.delete_setor_membros, [id]);
             await con.query('COMMIT')
-            return true;
+            return {result:true};
         }
         catch (ex) {
             await con.query('ROLLBACK');
@@ -112,6 +110,25 @@ const SetorMembroRepository = {
         try {
             await con.query('START TRANSACTION');
             let result = await con.query(queries.readByEmail_setor_membros, [email]);
+            await con.query('COMMIT');
+            return result;
+        }
+        catch (ex) {
+            await con.query('ROLLBACK');
+            console.log(ex)
+            throw ex;
+        }
+        finally {
+            await con.destroy();
+            await con.release();
+        }
+    },
+    //------//
+    async readBySetor(setor_id) {
+        let con = await dbConnection();
+        try {
+            await con.query('START TRANSACTION');
+            let result = await con.query(queries.readBySetor_setor_membros, [setor_id]);
             await con.query('COMMIT');
             return result;
         }

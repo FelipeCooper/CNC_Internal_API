@@ -4,6 +4,7 @@ const SetoresServices = require('../services/SetorServices');
 
 routes.get('/mostrar', async (req, res) => {
     let setores = await SetoresServices.read();
+    console.log(setores)
     res.json(setores)
 })
 routes.post('/registrar', async (req,res)=>{
