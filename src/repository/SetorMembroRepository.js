@@ -28,7 +28,7 @@ const SetorMembroRepository = {
         let con = await dbConnection();
         try {
             await con.query("START TRANSACTION");
-            let SetorMembros = await con.query(queries.readsetor_id_membros, [id]);
+            let SetorMembros = await con.query(queries.readID_setor_membros, [id]);
             await con.query('COMMIT');
             return SetorMembros;
         }

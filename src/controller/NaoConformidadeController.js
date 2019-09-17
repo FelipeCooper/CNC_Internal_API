@@ -38,8 +38,8 @@ routes.post('/mostrar', async (req, res) => {
         return (resultado)
     });
     Promise.all(todasNaoConformidades).then(resultado => {  //resolve as promises
-        res.json(resultado)
-    });
+        res.json(resultado);
+    });    
 })
 routes.post('/registrar', async (req, res) => {
     let body = req.body;

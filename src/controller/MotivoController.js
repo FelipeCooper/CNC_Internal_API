@@ -2,7 +2,7 @@ const express = require('express');
 const routes = express.Router();
 const MotivoServices = require('../services/MotivoServices')
 
-routes.post('/mostrar', async (req, res) => {
+routes.get('/mostrar', async (req, res) => {
     let result = await MotivoServices.read();
     res.json(result);
 })
