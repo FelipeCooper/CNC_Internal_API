@@ -25,6 +25,17 @@ const MotivoServices = {
     async motivoHasSetor(idSetor){
         let motivosHasSetor = await MotivoRepository.motivoHasSetor(idSetor);
         return motivosHasSetor;
+    },
+    async motivoLinkSetor(motivo_id, setor_id){
+        let result = await MotivoRepository.motivoHasSetor(setor_id);
+        let existe =  false;
+        for (let i = 0; i< result.length ;i++ ){
+            if(result[i].motivo_id == motivo_id){
+                existe = true;
+            }
+        }
+        console.log(existe)
+        existe ? {result:false} : await MotivoRepository.motivoLinkSetor(motivo_id, setor_id); 
     }
 
 }

@@ -82,7 +82,7 @@ const MotivoRepository = {
         }
     },
     //------//
-    async read(){
+    async read() {
         let con = await dbConnection();
         try {
             await con.query("START TRANSACTION");
@@ -90,30 +90,48 @@ const MotivoRepository = {
             await con.query('commit');
             return result;
         }
-        catch(ex){
+        catch (ex) {
             con.query('ROLLBACK');
             console.log(ex);
             throw ex;
         }
-        finally{
+        finally {
             await con.destroy();
             await con.release();
         }
     },
-    async motivoHasSetor(idMotivo){
+    async motivoHasSetor(idMotivo) {
         let con = await dbConnection();
-        try{
+        try {
             await con.query('START TRANSACTION');
-            let result = con.query(queries.motivo_has_setor,[idMotivo]);
+            let result = con.query(queries.motivo_has_setor, [idMotivo]);
             await con.query('COMMIT');
             return result;
         }
-        catch(ex){
-            con.query('ROLLBACK');
+        catch (ex) {
+            await con.query('ROLLBACK');
             console.log(ex);
             throw ex;
         }
-        finally{
+        finally {
+            await con.destroy();
+            await con.release();
+        }
+    },
+    async motivoLinkSetor(motivo_id, setor_id) {
+        let con = await dbConnection();
+        try {
+            await con.query('START TRANSACTION');
+            await con.query(queries.motivo_link_setor, [motivo_id, setor_id]);
+            await con.query('COMMIT');
+            return { result: true };
+        }
+        catch (ex) {
+            await con.query('ROLLBACK');
+            console.log(ex);
+            throw ex;
+        }
+        finally {
             await con.destroy();
             await con.release();
         }

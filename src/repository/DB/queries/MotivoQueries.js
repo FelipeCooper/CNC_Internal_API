@@ -4,5 +4,6 @@ module.exports = {
     read_nc_motivos:   `SELECT * FROM nc_motivos`,
     update_nc_motivos: `UPDATE nc_motivos SET nc_motivos.titulo = ? WHERE nc_motivos.id = ?`,
     delete_nc_motivos: `DELETE FROM nc_motivos WHERE nc_motivos.id = ?`,
-    motivo_has_setor: `SELECT * FROM nc_motivos_has_setor WHERE setor_id = ?`
+    motivo_has_setor: `SELECT * FROM nc_motivos_has_setor WHERE setor_id = ?`,
+    motivo_link_setor: `INSERT INTO nc_motivos_has_setor (motivo_id, setor_id) VALUES(?,?)`
 }
