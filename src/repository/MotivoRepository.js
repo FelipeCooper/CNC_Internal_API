@@ -9,7 +9,7 @@ const MotivoRepository = {
             let savedMotivo = await con.query(queries.insert_nc_motivos, [motivo.titulo]);
             await con.query('COMMIT');
             motivo.id = savedMotivo.insertId;
-            return motivo;
+            return { result: true };
         }
         catch (ex) {
             await con.query('ROLLBACK');

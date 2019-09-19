@@ -6,7 +6,8 @@ routes.get('/mostrar', async (req, res) => {
     let result = await MotivoServices.read();
     res.json(result);
 })
-routes.post('cadastrar', async (req, res) => {
+routes.post('/cadastrar', async (req, res) => {
+    console.log(req.body)
     let result = await MotivoServices.save(req.body.titulo);
     res.json(result);
 })
@@ -18,8 +19,8 @@ routes.put('/atualizar', async (req, res) => {
     res.json(result);
 })
 routes.post('/motivoLinkSetor', async (req, res) => {
-    console.log(req.body)
     let result = await MotivoServices.motivoLinkSetor(req.body.motivo_id, req.body.setor_id);
+    console.log(result)
     res.json(result);
 })
 routes.post('/setor', async (req, res) => {
