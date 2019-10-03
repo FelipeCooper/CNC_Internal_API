@@ -33,7 +33,7 @@ const AdminServices = {
     async verifica(email){
         let result = await AdminRepository.readByEmail(email);
         if (result.length != 0){
-            return result[0];
+            return {...result[0], resultado: 'Admin'};
         }else{
             return({resultado: 'NaoAutorizado'})
         }

@@ -20,7 +20,10 @@ routes.put('/atualizar', async (req, res) => {
 })
 routes.post('/motivoLinkSetor', async (req, res) => {
     let result = await MotivoServices.motivoLinkSetor(req.body.motivo_id, req.body.setor_id);
-    console.log(result)
+    res.json(result);
+})
+routes.post('/motivoUnlinkSetor', async (req, res) => {
+    let result = await MotivoServices.motivoUnlinkSetor(req.body.motivo_id, req.body.setor_id);
     res.json(result);
 })
 routes.post('/setor', async (req, res) => {
