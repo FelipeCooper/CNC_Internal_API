@@ -33,7 +33,8 @@ routes.post('/mostrar', async (req, res) => {
             naoConformidade.observacoes,
             setorResponsavel.titulo,
             franquia.titulo,
-            data
+            data,
+            naoConformidade.id
         );
         return (resultado)
     });
@@ -46,6 +47,10 @@ routes.post('/registrar', async (req, res) => {
     let result = await NaoConformidadesServices.save(body.setor_id, body.motivo_id, body.submotivo_id, body.condominio,
         body.responsavel, body.responsavel_id, body.obs, body.setorResponsavel, body.franquia_id)
     res.json(result)
+})
+routes.delete('/deletar', async(req,res)=>{
+    let result = await NaoConformidadesServices.delete(req.body.id);
+    res.json(result);
 })
 
 //Functions Auxiliares de Promises//

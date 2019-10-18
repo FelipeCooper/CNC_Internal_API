@@ -15,6 +15,14 @@ const NaoConformidadeServices = {
     async readBySetor(setorId,data_start,data_end){
         let result = await NaoConformidadesRepository.readBySetor(setorId,data_start,data_end);
         return(result);
+    },
+    async delete(id){
+        let result = await NaoConformidadesRepository.delete(id);
+        if(result){
+            return {resultado: true}
+        }else{
+            return{resultado: false}
+        }
     }
 }
 

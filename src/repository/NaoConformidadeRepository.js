@@ -24,6 +24,25 @@ module.exports = {
             await con.release();
         }
     },
+    //----//
+    async delete(id){
+        let con = await dbConnection();
+        try{
+            await con.query("START TRANSACTION");
+            await con.query(queries.delete_nc_cadastro,[id]);
+            await con.query("COMMIT");
+            return true;
+        }
+        catch(ex){
+            await con.query("ROLLBACK");
+            console.log(ex);
+            throw ex;
+        }
+        finally{
+            await con.destroy();
+            await con.release();
+        }
+    },
     //---//
     async read(data_start,data_end){
         let con = await dbConnection();

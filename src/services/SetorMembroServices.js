@@ -26,22 +26,14 @@ const SetorMembroServices = {
     async readByEmail(email) {
         let result = await SetorMembroRepository.readByEmail(email);
         if (result.length != 0) {
-            return result[0];
+            return {...result[0],resultado: "user"};
         } else {
-            return { result: 'Não é um membro' }
+            return ({ resultado: 'NaoAutorizado' })
         }
     },
     async readBySetor(setor_id) {
         let result = await SetorMembroRepository.readBySetor(setor_id);
         return result;
-    },
-    async verifica(email) {
-        let result = await SetorMembroRepository.readByEmail(email);
-        if (result.length != 0) {
-            return result[0];
-        } else {
-            return ({ resultado: 'NaoAutorizado' })
-        }
     }
 }
 module.exports = SetorMembroServices;
